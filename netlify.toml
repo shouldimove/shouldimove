@@ -1,0 +1,12 @@
+[build]
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+# Redirect www to apex
+[[redirects]]
+  from = "https://www.shouldimoveapp.com/*"
+  to   = "https://shouldimoveapp.com/:splat"
+  status = 301
+  force  = true

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Activating Pro — Should I Move?</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Public+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #060e22; --navy2: #0b1630; --blue: #1a8cff;
+      --cyan: #00d4ff; --green: #00e07a; --red: #ff4f4f;
+      --text: #e8eef8; --muted: #6b82a8; --border: #1a2d55;
+    }
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: 'Public Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 32px 24px;
+    }
+    .logo {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.03em;
+      color: #fff;
+      margin-bottom: 48px;
+    }
+    .logo span { color: var(--blue); }
+    .card {
+      background: #0d1b38;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 48px 40px;
+      max-width: 480px;
+      width: 100%;
+    }
+    .icon { font-size: 3rem; margin-bottom: 20px; }
+    h1 { font-family: 'Anton', sans-serif; font-size: 1.8rem; margin-bottom: 12px; color: #fff; }
+    .sub { color: var(--muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 28px; }
+    .spinner {
+      width: 40px; height: 40px;
+      border: 3px solid var(--border);
+      border-top-color: var(--blue);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 20px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .btn {
+      display: inline-block;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 14px 32px;
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      margin-top: 8px;
+    }
+    .btn:hover { opacity: 0.88; }
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      margin-top: 12px;
+    }
+    .success-check { color: var(--green); }
+    .error-x { color: var(--red); }
+    #state-loading, #state-success, #state-error { display: none; }
+  </style>
+</head>
+<body>
+  <div class="logo">SHOULD I <span>MOVE</span>?</div>
+
+  <div class="card">
+    <!-- Loading state -->
+    <div id="state-loading">
+      <div class="spinner"></div>
+      <h1>Activating Pro...</h1>
+      <p class="sub">Verifying your payment with Stripe. This takes just a second.</p>
+    </div>
+
+    <!-- Success state -->
+    <div id="state-success">
+      <div class="icon success-check">✓</div>
+      <h1>You're now Pro!</h1>
+      <p class="sub" id="success-msg">
+        Welcome to Should I Move Pro. All features are now unlocked — Best Moves rankings,
+        multi-city comparison, and PDF export.
+      </p>
+      <a class="btn" href="/?pro=activated">Go to the App →</a>
+    </div>
+
+    <!-- Error state -->
+    <div id="state-error">
+      <div class="icon error-x">✕</div>
+      <h1>Activation Failed</h1>
+      <p class="sub" id="error-msg">We couldn't verify your payment. Please try again or contact support.</p>
+      <a class="btn" href="/">Back to App</a>
+      <br>
+      <a class="btn btn-ghost" href="mailto:jesse.falloffthemap@gmail.com">Contact Support</a>
+    </div>
+  </div>
+
+  <script>
+    const TOKEN_KEY = 'sim_pro_token';
+
+    function show(stateId) {
+      ['state-loading', 'state-success', 'state-error'].forEach(id => {
+        document.getElementById(id).style.display = id === stateId ? 'block' : 'none';
+      });
+    }
+
+    async function activate() {
+      show('state-loading');
+
+      const params = new URLSearchParams(window.location.search);
+      const session_id = params.get('session_id');
+
+      if (!session_id) {
+        document.getElementById('error-msg').textContent =
+          'No session ID found in the URL. Please go back and try subscribing again.';
+        show('state-error');
+        return;
+      }
+
+      try {
+        const res = await fetch('/.netlify/functions/verify-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ session_id }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok || data.error || !data.token) {
+          throw new Error(data.error || 'Verification failed.');
+        }
+
+        // Store the Pro token in localStorage
+        localStorage.setItem(TOKEN_KEY, data.token);
+
+        // Personalize success message with email if available
+        if (data.email) {
+          document.getElementById('success-msg').textContent =
+            `Pro access activated for ${data.email}. All features are now unlocked — Best Moves rankings, multi-city comparison, and PDF export.`;
+        }
+
+        // Auto-redirect after 2.5 seconds
+        setTimeout(() => {
+          window.location.href = '/?pro=activated';
+        }, 2500);
+
+        show('state-success');
+
+      } catch (err) {
+        document.getElementById('error-msg').textContent = err.message;
+        show('state-error');
+      }
+    }
+
+    activate();
+  </script>
+</body>
+</html>

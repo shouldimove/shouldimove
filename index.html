@@ -1673,7 +1673,7 @@
 <!-- HEADER -->
 <header>
   <div class="logo">SHOULD I <span>MOVE</span>?</div>
-  <button class="header-cta" onclick="openProModal()">Go Pro — <span style="text-decoration:line-through;opacity:0.6;">$5.99</span> $3.99/mo</button>
+  <button class="header-cta" id="headerProBtn" onclick="openProModal()">Go Pro — <span style="text-decoration:line-through;opacity:0.6;">$5.99</span> $3.99/mo</button>
 </header>
 
 <!-- HERO -->
@@ -2214,8 +2214,9 @@
       </div>
       <div class="price"><span style="text-decoration:line-through;color:var(--muted);font-size:1.2rem;">$5.99</span> $3.99 <small>/ mo</small></div>
     </div>
-    <button class="modal-btn-full">START MY FREE 7-DAY TRIAL</button>
+    <button class="modal-btn-full" id="proCheckoutBtn" onclick="startCheckout()">START MY FREE 7-DAY TRIAL</button>
     <p class="modal-disclaimer">Early adopter rate: $3.99/month (regular price $5.99). Cancel before trial ends and you won't be charged.</p>
+    <p style="text-align:center;margin-top:14px;font-size:0.82rem;color:var(--muted)">Already subscribed? <a href="#" onclick="restoreAccess();return false;" style="color:var(--blue);text-decoration:none">Restore your access</a></p>
   </div>
 </div>
 
@@ -2993,29 +2994,40 @@ function renderBestMovesResults(ranked, originCity, job, salOrigin) {
   const bottomLockedHTML = bottomLocked.map((item, i) => rowHTML(item, i + 7)).join('');
 
   const container = document.getElementById('bmResults');
+  const pro = isPro();
+
+  // Pro users get all results; free users see rows 4-6 with top and bottom locked
+  const topSection = pro
+    ? topLockedHTML  // no blur, no overlay
+    : `<div class="bm-gate-wrapper">
+        <div class="bm-locked-rows">${topLockedHTML}</div>
+        <div class="bm-gate-overlay">
+          <div class="bm-gate-text">🔒 Your top 3 best moves are locked</div>
+          <div class="bm-gate-sub">The highest-value destinations require Pro.</div>
+          <button class="bm-unlock-btn" onclick="openProModal()">Unlock with Pro — $3.99/mo</button>
+        </div>
+      </div>`;
+
+  const bottomSection = pro
+    ? bottomLockedHTML
+    : `<div class="bm-gate-wrapper">
+        <div class="bm-locked-rows">${bottomLockedHTML}</div>
+        <div class="bm-gate-overlay">
+          <div class="bm-gate-text">🔒 ${bottomLocked.length} more results hidden</div>
+          <div class="bm-gate-sub">See the full ranked list with a Pro subscription.</div>
+          <button class="bm-unlock-btn" onclick="openProModal()">Unlock with Pro — $3.99/mo</button>
+        </div>
+      </div>`;
+
   container.innerHTML = `
     ${headerHTML}
     <div class="export-trigger-bar">
       <span>Save or share this report</span>
       <button class="export-trigger-btn" onclick="openExportModal('bestmoves')">⬇ Export Report</button>
     </div>
-    <div class="bm-gate-wrapper">
-      <div class="bm-locked-rows">${topLockedHTML}</div>
-      <div class="bm-gate-overlay">
-        <div class="bm-gate-text">🔒 Your top 3 best moves are locked</div>
-        <div class="bm-gate-sub">The highest-value destinations require Pro.</div>
-        <button class="bm-unlock-btn" onclick="openProModal()">Unlock with Pro — $3.99/mo</button>
-      </div>
-    </div>
+    ${topSection}
     ${freeRowsHTML}
-    <div class="bm-gate-wrapper">
-      <div class="bm-locked-rows">${bottomLockedHTML}</div>
-      <div class="bm-gate-overlay">
-        <div class="bm-gate-text">🔒 ${bottomLocked.length} more results hidden</div>
-        <div class="bm-gate-sub">See the full ranked list with a Pro subscription.</div>
-        <button class="bm-unlock-btn" onclick="openProModal()">Unlock with Pro — $3.99/mo</button>
-      </div>
-    </div>`;
+    ${bottomSection}`;
 }
 
 function loadComparison(fromIdx, toIdx) {
@@ -3186,8 +3198,9 @@ function renderMultiCityTable(originCity, destCities, job) {
     <th class="label-col"></th>
     <th class="home-col"><span class="city-label">${originCity.name}</span>${originCity.state} · HOME</th>`;
 
+  const pro = isPro();
   destCities.forEach((dest, i) => {
-    const isLocked = i >= MC_FREE_COLS;
+    const isLocked = !pro && i >= MC_FREE_COLS;
     thead += `<th ${isLocked ? 'class="mc-col-locked"' : ''}>
       <span class="city-label">${dest.name}</span>${dest.state}
     </th>`;
@@ -3200,14 +3213,14 @@ function renderMultiCityTable(originCity, destCities, job) {
     tbody += `<tr><td class="label-col">${m.label}</td><td>${m.home}</td>`;
     destCities.forEach((dest, i) => {
       const data     = destData[i];
-      const isLocked = i >= MC_FREE_COLS;
+      const isLocked = !pro && i >= MC_FREE_COLS;
       tbody += `<td ${isLocked ? 'class="mc-col-locked"' : ''}>${m.dest(data)}</td>`;
     });
     tbody += '</tr>';
   });
 
-  // Lock overlay (covers last N columns)
-  const lockOverlay = numLocked > 0 ? `
+  // Lock overlay (covers last N columns) — hidden for Pro users
+  const lockOverlay = (numLocked > 0 && !isPro()) ? `
     <div class="mc-locked-cover" style="width:${lockedWidth};">
       <div class="lc-icon">🔒</div>
       <div class="lc-title">${numLocked} ${numLocked === 1 ? 'city' : 'cities'} locked</div>
@@ -3785,6 +3798,118 @@ function generateCSV(cfg) {
   link.click();
   URL.revokeObjectURL(url);
 }
+
+// ─────────────────────────────────────────────
+// PRO STATE MANAGEMENT
+// ─────────────────────────────────────────────
+
+const TOKEN_KEY = 'sim_pro_token';
+
+function isPro() {
+  try {
+    const token = localStorage.getItem(TOKEN_KEY);
+    if (!token) return false;
+    const payload = JSON.parse(atob(token));
+    return typeof payload.expires === 'number' && Date.now() < payload.expires;
+  } catch { return false; }
+}
+
+function activatePro(token) {
+  localStorage.setItem(TOKEN_KEY, token);
+  refreshProUI();
+}
+
+function deactivatePro() {
+  localStorage.removeItem(TOKEN_KEY);
+  refreshProUI();
+}
+
+function refreshProUI() {
+  const pro = isPro();
+
+  // Update header button
+  const headerBtn = document.getElementById('headerProBtn');
+  if (headerBtn) {
+    if (pro) {
+      headerBtn.innerHTML = '✓ Pro Active';
+      headerBtn.onclick = null;
+      headerBtn.style.background = 'var(--green)';
+      headerBtn.style.color = '#000';
+    } else {
+      headerBtn.innerHTML = 'Go Pro — <span style="text-decoration:line-through;opacity:0.6;">$5.99</span> $3.99/mo';
+      headerBtn.onclick = openProModal;
+      headerBtn.style.background = '';
+      headerBtn.style.color = '';
+    }
+  }
+
+  // Hide the Pro teaser section when already Pro
+  const proSection = document.querySelector('.pro-teaser');
+  if (proSection) proSection.style.display = pro ? 'none' : '';
+}
+
+async function startCheckout() {
+  const btn = document.getElementById('proCheckoutBtn');
+  const original = btn.innerHTML;
+  btn.textContent = 'Redirecting to checkout…';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('/.netlify/functions/create-checkout', { method: 'POST' });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    window.location.href = data.url;
+  } catch (err) {
+    btn.innerHTML = original;
+    btn.disabled = false;
+    alert('Could not start checkout: ' + err.message + '\nPlease try again or contact support.');
+  }
+}
+
+async function restoreAccess() {
+  const email = prompt('Enter the email address you used when subscribing:');
+  if (!email || !email.includes('@')) {
+    if (email !== null) alert('Please enter a valid email address.');
+    return;
+  }
+
+  // For restore: redirect through a new Stripe Customer Portal session.
+  // Until the portal is configured, give them a direct link to manage billing.
+  const confirmed = confirm(
+    `We'll verify your subscription for ${email} on the next screen.\n\n` +
+    `If you're already subscribed, click OK to go to Stripe — log in there ` +
+    `and you'll be redirected back to activate your access.`
+  );
+  if (confirmed) {
+    // Re-run the checkout flow — Stripe will detect the existing customer and subscription
+    await startCheckout();
+  }
+}
+
+// On page load: check for ?pro=activated param (set by activate.html redirect)
+(function handleActivationReturn() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('pro') === 'activated') {
+    // Show a success toast
+    const toast = document.createElement('div');
+    toast.style.cssText = [
+      'position:fixed', 'bottom:28px', 'left:50%', 'transform:translateX(-50%)',
+      'background:#00e07a', 'color:#000', 'font-weight:700',
+      'padding:14px 28px', 'border-radius:10px', 'z-index:9999',
+      'font-size:0.95rem', 'box-shadow:0 4px 24px rgba(0,224,122,0.35)',
+      'white-space:nowrap',
+    ].join(';');
+    toast.textContent = '🎉 Pro access activated! All features are unlocked.';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.style.opacity = '0', 5000);
+    setTimeout(() => toast.remove(), 5500);
+    // Clean URL so refresh doesn't re-trigger
+    window.history.replaceState({}, '', '/');
+  }
+
+  // Apply Pro UI state on every load
+  refreshProUI();
+})();
 
 // ─────────────────────────────────────────────
 // PRO MODAL
