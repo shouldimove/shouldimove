@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Relocation Comparison Widget — ShouldIMoveApp.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-D6WSGPKKDX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-D6WSGPKKDX');
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --accent: #1a8cff; --navy: #060e22; --card: #0d1b38; --border: #1a2d55; --text: #e8eef8; --muted: #6b82a8; --green: #00e07a; --red: #ff4f4f; }
+    html, body { height: 100%; font-family: 'Public Sans', sans-serif; font-size: 14px; background: var(--navy); color: var(--text); line-height: 1.5; }
+    .widget { display: flex; flex-direction: column; min-height: 100vh; }
+    .w-header { background: var(--accent); padding: 14px 18px 12px; }
+    .w-employer { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 2px; }
+    .w-headline { font-size: 1rem; font-weight: 800; color: #fff; line-height: 1.25; }
+    .w-dest-tag { display: inline-block; background: rgba(255,255,255,0.2); border-radius: 4px; padding: 1px 7px; font-size: 0.78rem; font-weight: 700; color: #fff; margin-top: 6px; }
+    .w-form { padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; border-bottom: 1px solid var(--border); }
+    .w-field label { display: block; font-size: 0.67rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin-bottom: 4px; }
+    .w-field select { width: 100%; background: var(--card); border: 1px solid var(--border); border-radius: 7px; color: var(--text); font-family: 'Public Sans', sans-serif; font-size: 0.85rem; padding: 8px 28px 8px 10px; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath fill='%236b82a8' d='M5 7L0 0h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; cursor: pointer; }
+    .w-field select:focus { outline: none; border-color: var(--accent); }
+    .w-field input[type="number"] { width: 100%; background: var(--card); border: 1px solid var(--border); border-radius: 7px; color: var(--text); font-family: 'Public Sans', sans-serif; font-size: 0.85rem; padding: 8px 10px; transition: border-color 0.2s; }
+    .w-field input[type="number"]:focus { outline: none; border-color: var(--accent); }
+    .w-field input[type="number"]::placeholder { color: var(--muted); }
+    .w-compare-btn { width: 100%; background: var(--accent); border: none; border-radius: 8px; color: #fff; font-family: 'Public Sans', sans-serif; font-weight: 800; font-size: 0.88rem; padding: 10px; cursor: pointer; margin-top: 2px; transition: opacity 0.2s; }
+    .w-compare-btn:hover { opacity: 0.88; }
+    .w-results { padding: 14px 16px; flex: 1; display: none; }
+    .w-results.show { display: block; }
+    .w-pp-badge { text-align: center; margin-bottom: 14px; }
+    .w-pp-num { font-size: 2.2rem; font-weight: 800; line-height: 1; }
+    .w-pp-num.pos { color: var(--green); }
+    .w-pp-num.neg { color: var(--red); }
+    .w-pp-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin-top: 3px; }
+    .w-stats { display: flex; flex-direction: column; gap: 7px; }
+    .w-stat-row { display: flex; justify-content: space-between; align-items: center; background: var(--card); border: 1px solid var(--border); border-radius: 7px; padding: 9px 12px; }
+    .w-stat-label { font-size: 0.78rem; color: var(--muted); }
+    .w-stat-vals { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; }
+    .w-stat-you { font-size: 0.7rem; color: var(--muted); }
+    .w-stat-dest { font-size: 0.88rem; font-weight: 700; color: var(--text); }
+    .w-verdict { margin-top: 12px; padding: 10px 12px; border-radius: 7px; font-size: 0.8rem; line-height: 1.5; color: var(--text); }
+    .w-verdict.pos { background: rgba(0,224,122,0.08); border: 1px solid rgba(0,224,122,0.25); }
+    .w-verdict.neg { background: rgba(255,79,79,0.08); border: 1px solid rgba(255,79,79,0.25); }
+    .w-footer { padding: 10px 16px; border-top: 1px solid var(--border); text-align: center; margin-top: auto; }
+    .w-footer a { font-size: 0.72rem; color: var(--muted); text-decoration: none; }
+    .w-footer a span { color: var(--accent); }
+    .w-footer a:hover { color: var(--text); }
+  </style>
+</head>
+<body>
+<div class="widget">
+  <div class="w-header">
+    <div class="w-employer" id="wEmployer"></div>
+    <div class="w-headline" id="wHeadline">How does your city compare?</div>
+    <div class="w-dest-tag" id="wDestTag"></div>
+  </div>
+  <div class="w-form">
+    <div class="w-field">
+      <label>Your Current City</label>
+      <select id="wFromCity"></select>
+    </div>
+    <div class="w-field">
+      <label>Your Current Salary (annual)</label>
+      <input type="number" id="wSalary" placeholder="e.g. 72000" min="0" step="1000" />
+    </div>
+    <button class="w-compare-btn" onclick="wCompare()">Compare &#8594;</button>
+  </div>
+  <div class="w-results" id="wResults"></div>
+  <div class="w-footer">
+    <a href="https://shouldimoveapp.com/?utm_source=widget&utm_medium=embed&utm_campaign=employer" target="_blank" rel="noopener">
+      Full analysis at <span>ShouldIMoveApp.com</span> &#8594;
+    </a>
+  </div>
+</div>
+<script>
+const cities = [
+  // name, state, COL index (100=US avg), median 1BR rent, salary multiplier
+  // ── Very High COL ──
+  { name:"New York City", state:"NY", col:187, rent:3200, sm:1.35, tax:0.104 },
+  { name:"San Francisco", state:"CA", col:194, rent:3400, sm:1.45, tax:0.070 },
+  { name:"San Jose", state:"CA", col:183, rent:3100, sm:1.40, tax:0.070 },
+  { name:"Honolulu", state:"HI", col:196, rent:2400, sm:1.05, tax:0.083 },
+  { name:"Oakland", state:"CA", col:175, rent:2800, sm:1.30, tax:0.070 },
+  { name:"Sunnyvale", state:"CA", col:188, rent:3200, sm:1.42, tax:0.070 },
+  { name:"Fremont", state:"CA", col:175, rent:3000, sm:1.38, tax:0.070 },
+  { name:"Bellevue", state:"WA", col:163, rent:2200, sm:1.32, tax:0.000 },
+  { name:"Kirkland", state:"WA", col:152, rent:2100, sm:1.25, tax:0.000 },
+  { name:"Arlington", state:"VA", col:155, rent:2400, sm:1.25, tax:0.055 },
+  { name:"Alexandria", state:"VA", col:150, rent:2300, sm:1.22, tax:0.055 },
+  { name:"Jersey City", state:"NJ", col:155, rent:2400, sm:1.20, tax:0.070 },
+  // ── High COL ──
+  { name:"Los Angeles", state:"CA", col:173, rent:2400, sm:1.25, tax:0.070 },
+  { name:"Seattle", state:"WA", col:162, rent:2100, sm:1.30, tax:0.000 },
+  { name:"Washington DC", state:"DC", col:158, rent:2300, sm:1.25, tax:0.085 },
+  { name:"Boston", state:"MA", col:162, rent:2800, sm:1.25, tax:0.050 },
+  { name:"San Diego", state:"CA", col:161, rent:2300, sm:1.15, tax:0.070 },
+  { name:"Irvine", state:"CA", col:158, rent:2600, sm:1.22, tax:0.070 },
+  { name:"Anaheim", state:"CA", col:155, rent:2200, sm:1.15, tax:0.070 },
+  { name:"Long Beach", state:"CA", col:153, rent:2100, sm:1.15, tax:0.070 },
+  { name:"Chula Vista", state:"CA", col:148, rent:2100, sm:1.10, tax:0.070 },
+  { name:"Santa Ana", state:"CA", col:145, rent:2100, sm:1.10, tax:0.070 },
+  { name:"Bridgeport", state:"CT", col:148, rent:1800, sm:1.10, tax:0.055 },
+  { name:"New Haven", state:"CT", col:135, rent:1700, sm:1.05, tax:0.055 },
+  { name:"Hartford", state:"CT", col:132, rent:1500, sm:1.05, tax:0.055 },
+  { name:"Newark", state:"NJ", col:140, rent:2000, sm:1.15, tax:0.070 },
+  { name:"Yonkers", state:"NY", col:148, rent:2000, sm:1.15, tax:0.081 },
+  { name:"Miami", state:"FL", col:123, rent:2100, sm:1.05, tax:0.000 },
+  { name:"Fort Lauderdale", state:"FL", col:118, rent:1900, sm:1.00, tax:0.000 },
+  { name:"West Palm Beach", state:"FL", col:118, rent:1900, sm:1.00, tax:0.000 },
+  { name:"Renton", state:"WA", col:140, rent:1900, sm:1.15, tax:0.000 },
+  { name:"Providence", state:"RI", col:131, rent:1600, sm:0.98, tax:0.055 },
+  // ── Mid-High COL ──
+  { name:"Denver", state:"CO", col:127, rent:1800, sm:1.10, tax:0.044 },
+  { name:"Naperville", state:"IL", col:125, rent:1800, sm:1.10, tax:0.050 },
+  { name:"Sacramento", state:"CA", col:130, rent:1700, sm:1.05, tax:0.070 },
+  { name:"Riverside", state:"CA", col:118, rent:1600, sm:0.98, tax:0.070 },
+  { name:"Portland", state:"OR", col:133, rent:1700, sm:1.10, tax:0.090 },
+  { name:"Eugene", state:"OR", col:118, rent:1500, sm:0.98, tax:0.090 },
+  { name:"Vancouver", state:"WA", col:130, rent:1700, sm:1.05, tax:0.000 },
+  { name:"Everett", state:"WA", col:128, rent:1700, sm:1.05, tax:0.000 },
+  { name:"Tacoma", state:"WA", col:118, rent:1600, sm:1.05, tax:0.000 },
+  { name:"Chicago", state:"IL", col:118, rent:1700, sm:1.10, tax:0.052 },
+  { name:"Philadelphia", state:"PA", col:118, rent:1600, sm:1.10, tax:0.069 },
+  { name:"Allentown", state:"PA", col:103, rent:1250, sm:0.92, tax:0.031 },
+  { name:"Baltimore", state:"MD", col:114, rent:1500, sm:1.05, tax:0.078 },
+  { name:"Murfreesboro", state:"TN", col:100, rent:1300, sm:0.92, tax:0.000 },
+  { name:"Salt Lake City", state:"UT", col:114, rent:1500, sm:1.00, tax:0.046 },
+  { name:"Provo", state:"UT", col:107, rent:1350, sm:0.95, tax:0.046 },
+  { name:"Ogden", state:"UT", col:103, rent:1250, sm:0.90, tax:0.046 },
+  { name:"Minneapolis", state:"MN", col:115, rent:1500, sm:1.05, tax:0.070 },
+  { name:"St. Paul", state:"MN", col:110, rent:1400, sm:0.98, tax:0.070 },
+  { name:"Austin", state:"TX", col:121, rent:1700, sm:1.10, tax:0.000 },
+  { name:"Frisco", state:"TX", col:118, rent:1600, sm:1.08, tax:0.000 },
+  { name:"Plano", state:"TX", col:108, rent:1450, sm:1.05, tax:0.000 },
+  { name:"McKinney", state:"TX", col:113, rent:1550, sm:1.05, tax:0.000 },
+  { name:"Scottsdale", state:"AZ", col:115, rent:1700, sm:1.05, tax:0.025 },
+  { name:"Aurora", state:"CO", col:118, rent:1600, sm:1.05, tax:0.044 },
+  { name:"Lakewood", state:"CO", col:120, rent:1650, sm:1.05, tax:0.044 },
+  { name:"Fort Collins", state:"CO", col:115, rent:1500, sm:0.98, tax:0.044 },
+  { name:"Boise", state:"ID", col:113, rent:1400, sm:0.92, tax:0.057 },
+  { name:"Meridian", state:"ID", col:110, rent:1400, sm:0.92, tax:0.057 },
+  { name:"Anchorage", state:"AK", col:128, rent:1500, sm:1.05, tax:0.000 },
+  { name:"Portland", state:"ME", col:118, rent:1500, sm:1.00, tax:0.065 },
+  { name:"Burlington", state:"VT", col:118, rent:1550, sm:0.98, tax:0.080 },
+  { name:"Worcester", state:"MA", col:125, rent:1700, sm:1.05, tax:0.050 },
+  { name:"Lowell", state:"MA", col:118, rent:1500, sm:0.98, tax:0.050 },
+  { name:"Albany", state:"NY", col:110, rent:1300, sm:0.95, tax:0.065 },
+  { name:"Manchester", state:"NH", col:115, rent:1450, sm:0.98, tax:0.000 },
+  { name:"Ann Arbor", state:"MI", col:115, rent:1500, sm:1.05, tax:0.043 },
+  { name:"Richmond", state:"VA", col:103, rent:1300, sm:0.95, tax:0.055 },
+  { name:"Chesapeake", state:"VA", col:110, rent:1400, sm:0.98, tax:0.055 },
+  { name:"Virginia Beach", state:"VA", col:107, rent:1350, sm:0.95, tax:0.055 },
+  { name:"Norfolk", state:"VA", col:103, rent:1200, sm:0.92, tax:0.055 },
+  { name:"Newport News", state:"VA", col:100, rent:1200, sm:0.90, tax:0.055 },
+  // ── Mid COL ──
+  { name:"Tampa", state:"FL", col:108, rent:1600, sm:0.92, tax:0.000 },
+  { name:"St. Petersburg", state:"FL", col:105, rent:1550, sm:0.90, tax:0.000 },
+  { name:"Clearwater", state:"FL", col:105, rent:1500, sm:0.90, tax:0.000 },
+  { name:"Cape Coral", state:"FL", col:103, rent:1500, sm:0.88, tax:0.000 },
+  { name:"Pompano Beach", state:"FL", col:115, rent:1800, sm:0.95, tax:0.000 },
+  { name:"Orlando", state:"FL", col:103, rent:1500, sm:0.92, tax:0.000 },
+  { name:"Atlanta", state:"GA", col:108, rent:1500, sm:1.00, tax:0.055 },
+  { name:"Savannah", state:"GA", col:98, rent:1200, sm:0.88, tax:0.055 },
+  { name:"Las Vegas", state:"NV", col:109, rent:1400, sm:0.95, tax:0.000 },
+  { name:"Henderson", state:"NV", col:108, rent:1450, sm:0.95, tax:0.000 },
+  { name:"Reno", state:"NV", col:110, rent:1450, sm:0.95, tax:0.000 },
+  { name:"Phoenix", state:"AZ", col:107, rent:1450, sm:1.00, tax:0.025 },
+  { name:"Tempe", state:"AZ", col:110, rent:1500, sm:1.00, tax:0.025 },
+  { name:"Mesa", state:"AZ", col:105, rent:1400, sm:0.95, tax:0.025 },
+  { name:"Chandler", state:"AZ", col:107, rent:1400, sm:0.98, tax:0.025 },
+  { name:"Gilbert", state:"AZ", col:108, rent:1450, sm:0.98, tax:0.025 },
+  { name:"Glendale", state:"AZ", col:103, rent:1350, sm:0.93, tax:0.025 },
+  { name:"Peoria", state:"AZ", col:106, rent:1400, sm:0.95, tax:0.025 },
+  { name:"Colorado Springs", state:"CO", col:107, rent:1350, sm:0.92, tax:0.044 },
+  { name:"Dallas", state:"TX", col:107, rent:1350, sm:1.05, tax:0.000 },
+  { name:"Irving", state:"TX", col:105, rent:1300, sm:1.00, tax:0.000 },
+  { name:"Garland", state:"TX", col:100, rent:1250, sm:0.95, tax:0.000 },
+  { name:"Denton", state:"TX", col:100, rent:1300, sm:0.95, tax:0.000 },
+  { name:"Raleigh", state:"NC", col:107, rent:1450, sm:1.00, tax:0.045 },
+  { name:"Cary", state:"NC", col:112, rent:1500, sm:1.02, tax:0.045 },
+  { name:"Durham", state:"NC", col:108, rent:1400, sm:1.00, tax:0.045 },
+  { name:"Charlotte", state:"NC", col:105, rent:1400, sm:0.98, tax:0.045 },
+  { name:"Winston-Salem", state:"NC", col:95, rent:1100, sm:0.88, tax:0.045 },
+  { name:"Greensboro", state:"NC", col:95, rent:1100, sm:0.88, tax:0.045 },
+  { name:"Madison", state:"WI", col:107, rent:1250, sm:0.95, tax:0.065 },
+  { name:"Salem", state:"OR", col:110, rent:1350, sm:0.92, tax:0.090 },
+  { name:"Spokane", state:"WA", col:100, rent:1150, sm:0.88, tax:0.000 },
+  { name:"Stockton", state:"CA", col:107, rent:1300, sm:0.90, tax:0.070 },
+  { name:"Fresno", state:"CA", col:103, rent:1200, sm:0.90, tax:0.070 },
+  { name:"Modesto", state:"CA", col:103, rent:1200, sm:0.88, tax:0.070 },
+  { name:"Aurora", state:"IL", col:110, rent:1400, sm:0.95, tax:0.050 },
+  { name:"Overland Park", state:"KS", col:97, rent:1100, sm:0.92, tax:0.058 },
+  { name:"Charleston", state:"SC", col:108, rent:1500, sm:0.92, tax:0.065 },
+  { name:"Columbia", state:"SC", col:91, rent:1050, sm:0.85, tax:0.065 },
+  { name:"Fargo", state:"ND", col:92, rent:1000, sm:0.88, tax:0.020 },
+  { name:"Cheyenne", state:"WY", col:92, rent:1050, sm:0.88, tax:0.000 },
+  { name:"Santa Fe", state:"NM", col:105, rent:1300, sm:0.90, tax:0.050 },
+  { name:"Albuquerque", state:"NM", col:93, rent:1050, sm:0.88, tax:0.050 },
+  { name:"Tucson", state:"AZ", col:93, rent:1000, sm:0.85, tax:0.025 },
+  { name:"Pasadena", state:"TX", col:92, rent:1100, sm:0.88, tax:0.000 },
+  { name:"Corpus Christi", state:"TX", col:86, rent:950, sm:0.83, tax:0.000 },
+  { name:"Midland", state:"TX", col:97, rent:1200, sm:0.95, tax:0.000 },
+  // ── Lower-Mid COL ──
+  { name:"Jacksonville", state:"FL", col:97, rent:1300, sm:0.90, tax:0.000 },
+  { name:"Gainesville", state:"FL", col:93, rent:1100, sm:0.85, tax:0.000 },
+  { name:"Lakeland", state:"FL", col:95, rent:1200, sm:0.85, tax:0.000 },
+  { name:"Tallahassee", state:"FL", col:94, rent:1100, sm:0.85, tax:0.000 },
+  { name:"Augusta", state:"GA", col:90, rent:1050, sm:0.85, tax:0.055 },
+  { name:"Columbus", state:"GA", col:85, rent:950, sm:0.82, tax:0.055 },
+  { name:"Houston", state:"TX", col:97, rent:1250, sm:1.00, tax:0.000 },
+  { name:"San Antonio", state:"TX", col:93, rent:1100, sm:0.90, tax:0.000 },
+  { name:"Fort Worth", state:"TX", col:103, rent:1300, sm:0.98, tax:0.000 },
+  { name:"Waco", state:"TX", col:85, rent:950, sm:0.82, tax:0.000 },
+  { name:"Killeen", state:"TX", col:83, rent:900, sm:0.80, tax:0.000 },
+  { name:"Beaumont", state:"TX", col:87, rent:1000, sm:0.83, tax:0.000 },
+  { name:"Odessa", state:"TX", col:90, rent:1050, sm:0.88, tax:0.000 },
+  { name:"Columbus", state:"OH", col:97, rent:1100, sm:0.92, tax:0.058 },
+  { name:"Cleveland", state:"OH", col:90, rent:1000, sm:0.88, tax:0.058 },
+  { name:"Akron", state:"OH", col:88, rent:950, sm:0.85, tax:0.058 },
+  { name:"Dayton", state:"OH", col:87, rent:950, sm:0.85, tax:0.058 },
+  { name:"Toledo", state:"OH", col:87, rent:950, sm:0.85, tax:0.058 },
+  { name:"Cincinnati", state:"OH", col:92, rent:1050, sm:0.90, tax:0.058 },
+  { name:"Pittsburgh", state:"PA", col:95, rent:1100, sm:0.90, tax:0.031 },
+  { name:"Erie", state:"PA", col:88, rent:950, sm:0.83, tax:0.031 },
+  { name:"Milwaukee", state:"WI", col:97, rent:1100, sm:0.90, tax:0.065 },
+  { name:"Green Bay", state:"WI", col:90, rent:950, sm:0.85, tax:0.065 },
+  { name:"Indianapolis", state:"IN", col:93, rent:1050, sm:0.90, tax:0.047 },
+  { name:"Fort Wayne", state:"IN", col:83, rent:850, sm:0.80, tax:0.047 },
+  { name:"South Bend", state:"IN", col:83, rent:850, sm:0.80, tax:0.047 },
+  { name:"Evansville", state:"IN", col:82, rent:850, sm:0.80, tax:0.047 },
+  { name:"Kansas City", state:"MO", col:93, rent:1100, sm:0.90, tax:0.055 },
+  { name:"St. Louis", state:"MO", col:90, rent:1050, sm:0.88, tax:0.055 },
+  { name:"Springfield", state:"MO", col:83, rent:900, sm:0.80, tax:0.055 },
+  { name:"Omaha", state:"NE", col:90, rent:1000, sm:0.88, tax:0.062 },
+  { name:"Lincoln", state:"NE", col:88, rent:950, sm:0.85, tax:0.062 },
+  { name:"Des Moines", state:"IA", col:87, rent:950, sm:0.85, tax:0.055 },
+  { name:"Sioux Falls", state:"SD", col:88, rent:950, sm:0.85, tax:0.000 },
+  { name:"Rapid City", state:"SD", col:90, rent:1000, sm:0.85, tax:0.000 },
+  { name:"Louisville", state:"KY", col:88, rent:1000, sm:0.85, tax:0.050 },
+  { name:"Lexington", state:"KY", col:90, rent:1050, sm:0.85, tax:0.050 },
+  { name:"Oklahoma City", state:"OK", col:84, rent:950, sm:0.82, tax:0.050 },
+  { name:"Tulsa", state:"OK", col:83, rent:900, sm:0.80, tax:0.050 },
+  { name:"Wichita", state:"KS", col:83, rent:900, sm:0.80, tax:0.058 },
+  { name:"Topeka", state:"KS", col:82, rent:870, sm:0.80, tax:0.058 },
+  { name:"Baton Rouge", state:"LA", col:94, rent:1050, sm:0.85, tax:0.040 },
+  { name:"New Orleans", state:"LA", col:97, rent:1200, sm:0.85, tax:0.040 },
+  { name:"Shreveport", state:"LA", col:80, rent:850, sm:0.78, tax:0.040 },
+  { name:"Birmingham", state:"AL", col:88, rent:1000, sm:0.83, tax:0.040 },
+  { name:"Huntsville", state:"AL", col:93, rent:1100, sm:0.90, tax:0.040 },
+  { name:"Memphis", state:"TN", col:83, rent:950, sm:0.82, tax:0.000 },
+  { name:"Knoxville", state:"TN", col:88, rent:1050, sm:0.83, tax:0.000 },
+  { name:"Chattanooga", state:"TN", col:88, rent:1050, sm:0.83, tax:0.000 },
+  { name:"Clarksville", state:"TN", col:88, rent:1050, sm:0.83, tax:0.000 },
+  { name:"Nashville", state:"TN", col:114, rent:1600, sm:0.98, tax:0.000 },
+  { name:"Little Rock", state:"AR", col:83, rent:900, sm:0.80, tax:0.050 },
+  { name:"Fayetteville", state:"AR", col:87, rent:950, sm:0.82, tax:0.050 },
+  { name:"Jackson", state:"MS", col:80, rent:850, sm:0.78, tax:0.050 },
+  { name:"Grand Rapids", state:"MI", col:92, rent:1050, sm:0.88, tax:0.043 },
+  { name:"Detroit", state:"MI", col:88, rent:1000, sm:0.90, tax:0.067 },
+  { name:"Warren", state:"MI", col:88, rent:1000, sm:0.88, tax:0.043 },
+  { name:"Lansing", state:"MI", col:87, rent:950, sm:0.85, tax:0.043 },
+  { name:"Buffalo", state:"NY", col:90, rent:1000, sm:0.88, tax:0.065 },
+  { name:"Rochester", state:"NY", col:90, rent:1000, sm:0.88, tax:0.065 },
+  { name:"Syracuse", state:"NY", col:88, rent:950, sm:0.85, tax:0.065 },
+  { name:"Springfield", state:"IL", col:87, rent:950, sm:0.85, tax:0.050 },
+  { name:"Rockford", state:"IL", col:88, rent:950, sm:0.83, tax:0.050 },
+  { name:"Fayetteville", state:"NC", col:88, rent:1050, sm:0.83, tax:0.045 },
+  { name:"Billings", state:"MT", col:95, rent:1100, sm:0.88, tax:0.065 },
+  { name:"Missoula", state:"MT", col:103, rent:1250, sm:0.88, tax:0.065 },
+  // ── Low COL ──
+  { name:"El Paso", state:"TX", col:85, rent:900, sm:0.80, tax:0.000 },
+  { name:"Laredo", state:"TX", col:82, rent:880, sm:0.78, tax:0.000 },
+  { name:"Brownsville", state:"TX", col:80, rent:850, sm:0.75, tax:0.000 },
+  { name:"Abilene", state:"TX", col:82, rent:850, sm:0.80, tax:0.000 },
+  { name:"Lubbock", state:"TX", col:82, rent:880, sm:0.80, tax:0.000 },
+  { name:"Amarillo", state:"TX", col:81, rent:870, sm:0.80, tax:0.000 },
+  { name:"Bakersfield", state:"CA", col:100, rent:1050, sm:0.88, tax:0.070 },
+  { name:"Las Cruces", state:"NM", col:85, rent:900, sm:0.80, tax:0.050 },
+  { name:"Charleston", state:"WV", col:83, rent:900, sm:0.80, tax:0.055 },
+].sort((a,b) => a.name.localeCompare(b.name));
+
+const costBases = [
+  { label:"🏠 Housing (Rent)",  base:1200, weight:1.5 },
+  { label:"🛒 Groceries",       base:360,  weight:0.7 },
+  { label:"🚗 Transportation",  base:380,  weight:0.6 },
+  { label:"⚕️ Healthcare",      base:280,  weight:0.5 },
+  { label:"💡 Utilities",       base:155,  weight:0.3 },
+  { label:"🍔 Dining Out",      base:300,  weight:0.8 },
+];
+
+// ─────────────────────────────────────────────
+// CATEGORY-AWARE SALARY SCALING
+// Different job types respond differently to local cost of living.
+// prof: market-rate tech/business; trades: union/licensed; gov: policy-set;
+// service: closely tracks minimum wage laws, which strongly correlate with COL.
+// SF min wage $18.67/hr, Seattle $19.97/hr, NYC $16/hr vs federal $7.25/hr
+// creates a real ~65% wage gap — reflected in the service formula.
+// Formulas calibrated to BLS OEWS metro-area dispersion data.
+// ─────────────────────────────────────────────
+
+
+function fmt(n) {
+  return n.toLocaleString('en-US');
+}
+
+// Read URL params
+const params    = new URLSearchParams(location.search);
+const destParam = params.get('to')       || '0';
+const employer  = params.get('employer') || '';
+const accentHex = (params.get('color')  || '1a8cff').replace('#','');
+
+document.documentElement.style.setProperty('--accent', '#' + accentHex);
+
+// Resolve destination city by index or name
+let destCity;
+if (/^\d+$/.test(destParam)) {
+  destCity = cities[+destParam] || cities[0];
+} else {
+  const q = destParam.toLowerCase();
+  destCity = cities.find(c => (c.name + ', ' + c.state).toLowerCase() === q)
+          || cities.find(c => c.name.toLowerCase() === q)
+          || cities[0];
+}
+
+// Set header copy
+document.getElementById('wEmployer').textContent = employer
+  ? employer.toUpperCase() + ' IS HIRING IN:'
+  : 'SHOULDIMOVEAPP.COM';
+document.getElementById('wHeadline').textContent = employer
+  ? 'Is ' + destCity.name + ' right for you?'
+  : 'How does your city compare to ' + destCity.name + '?';
+document.getElementById('wDestTag').textContent = String.fromCodePoint(0x1F4CD) + ' ' + destCity.name + ', ' + destCity.state;
+
+// Init — populate city dropdown only
+(function init() {
+  const fromSel = document.getElementById('wFromCity');
+  cities.forEach((c, i) => {
+    if (c === destCity) return;
+    fromSel.add(new Option(c.name + ', ' + c.state, i));
+  });
+})();
+
+function wCompare() {
+  const originCity  = cities[+document.getElementById('wFromCity').value];
+  const userSalary  = +document.getElementById('wSalary').value;
+
+  if (!originCity) return;
+  if (!userSalary || userSalary <= 0) {
+    const inp = document.getElementById('wSalary');
+    inp.style.borderColor = 'var(--red)';
+    setTimeout(() => { inp.style.borderColor = ''; }, 2000);
+    return;
+  }
+
+  // Purchasing power = salary / COL index (higher = better)
+  const ppOrigin = userSalary * (1 - originCity.tax) / originCity.col;
+  const ppDest   = userSalary * (1 - destCity.tax) / destCity.col;
+  const ppGain   = ((ppDest - ppOrigin) / ppOrigin * 100);
+  const ppStr    = (ppGain >= 0 ? '+' : '') + ppGain.toFixed(1) + '%';
+  const pos      = ppGain >= 0;
+  // Salary needed in dest city to match current purchasing power
+  const needed   = Math.round(userSalary * (1 - originCity.tax) / (1 - destCity.tax) * (destCity.col / originCity.col));
+
+  const el = document.getElementById('wResults');
+  el.className = 'w-results show';
+  el.innerHTML =
+    '<div class="w-pp-badge">' +
+      '<div class="w-pp-num ' + (pos ? 'pos' : 'neg') + '">' + ppStr + '</div>' +
+      '<div class="w-pp-label">Purchasing Power Change</div>' +
+    '</div>' +
+    '<div class="w-stats">' +
+      '<div class="w-stat-row">' +
+        '<span class="w-stat-label">&#x1F4B0; Your Salary</span>' +
+        '<div class="w-stat-vals">' +
+          '<span class="w-stat-you">' + originCity.name + ': $' + fmt(userSalary) + '/yr</span>' +
+          '<span class="w-stat-dest">Break-even in ' + destCity.name + ': $' + fmt(needed) + '/yr</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="w-stat-row">' +
+        '<span class="w-stat-label">&#x1F3E0; Avg 1BR Rent</span>' +
+        '<div class="w-stat-vals">' +
+          '<span class="w-stat-you">' + originCity.name + ': $' + fmt(originCity.rent) + '/mo</span>' +
+          '<span class="w-stat-dest">' + destCity.name + ': $' + fmt(destCity.rent) + '/mo</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="w-stat-row">' +
+        '<span class="w-stat-label">&#x1F4CA; Cost of Living Index</span>' +
+        '<div class="w-stat-vals">' +
+          '<span class="w-stat-you">' + originCity.name + ': ' + originCity.col + '</span>' +
+          '<span class="w-stat-dest">' + destCity.name + ': ' + destCity.col + '</span>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="w-verdict ' + (pos ? 'pos' : 'neg') + '">' +
+      (pos
+        ? '&#x2705; Your $' + fmt(userSalary) + ' goes <strong>' + ppStr + ' further</strong> in ' + destCity.name + ' than in ' + originCity.name + '.'
+        : '&#x26A0;&#xFE0F; You\'d need <strong>$' + fmt(needed) + '/yr</strong> in ' + destCity.name + ' to match your current purchasing power.'
+      ) +
+    '</div>';
+}
+</script>
+</body>
+</html>

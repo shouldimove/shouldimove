@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | ShouldIMoveApp.com</title>
+  <meta name="description" content="Get in touch with the ShouldIMoveApp.com team — questions, feedback, or partnership inquiries." />
+  <link rel="canonical" href="https://shouldimoveapp.com/contact.html" />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23060e22'/><text y='44' x='8' font-size='40' font-family='sans-serif' font-weight='900' fill='%231a8cff'>?</text></svg>" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-D6WSGPKKDX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-D6WSGPKKDX');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Public+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #060e22;
+      --navy2:  #0b1630;
+      --card:   #0d1b38;
+      --border: #1a2d55;
+      --blue:   #1a8cff;
+      --blue2:  #0070e0;
+      --cyan:   #00d4ff;
+      --green:  #00e07a;
+      --text:   #e8eef8;
+      --muted:  #6b82a8;
+      --white:  #ffffff;
+      --radius: 12px;
+    }
+
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: 'Public Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(180deg, #040b1c 0%, var(--navy) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.03em;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .logo span { color: var(--blue); }
+    .header-cta {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .header-cta:hover { background: var(--blue2); }
+
+    /* ── CONTENT ── */
+    .page-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+
+    .page-eyebrow {
+      display: inline-block;
+      background: rgba(26,140,255,0.12);
+      border: 1px solid rgba(26,140,255,0.3);
+      color: var(--cyan);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.1;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .intro {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 48px;
+      max-width: 560px;
+    }
+
+    /* ── CONTACT CARDS ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    .contact-card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 14px;
+    }
+
+    .contact-card h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .contact-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .contact-link {
+      display: inline-block;
+      color: var(--blue);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      border: 1px solid rgba(26,140,255,0.35);
+      border-radius: 8px;
+      padding: 8px 16px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .contact-link:hover {
+      background: rgba(26,140,255,0.1);
+      border-color: var(--blue);
+    }
+
+    /* ── FAQ ── */
+    .faq-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin-bottom: 20px;
+    }
+
+    .faq-section h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 24px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-item { margin-bottom: 24px; }
+    .faq-item:last-child { margin-bottom: 0; }
+
+    .faq-q {
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+
+    .faq-a {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .faq-a a { color: var(--blue); text-decoration: none; }
+    .faq-a a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+    footer a { color: var(--blue); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">Should<span>I</span>Move<span>?</span></a>
+  <a href="/" class="header-cta">← Back to App</a>
+</header>
+
+<div class="page-wrap">
+  <div class="page-eyebrow">Get in Touch</div>
+  <h1>Contact Us</h1>
+  <p class="intro">Questions, feedback, or partnership inquiries — we'd love to hear from you. We're a small team and try to respond within 2 business days.</p>
+
+  <div class="contact-grid">
+
+    <div class="contact-card">
+      <div class="contact-card-icon">✉️</div>
+      <h2>General Inquiries</h2>
+      <p>Questions about the app, your data, or anything else? Drop us a line.</p>
+      <a href="mailto:contact.shouldimoveapp@gmail.com" class="contact-link">contact.shouldimoveapp@gmail.com</a>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-card-icon">🤝</div>
+      <h2>Partnerships & Data</h2>
+      <p>Interested in licensing our aggregated relocation data or exploring a partnership? We're open to conversations.</p>
+      <a href="mailto:contact.shouldimoveapp@gmail.com?subject=Partnership%20Inquiry" class="contact-link">Get in touch</a>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-card-icon">🐛</div>
+      <h2>Report an Issue</h2>
+      <p>Found a data error or a bug? We take accuracy seriously — please let us know and we'll investigate.</p>
+      <a href="mailto:contact.shouldimoveapp@gmail.com?subject=Bug%20Report" class="contact-link">Report a bug</a>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-card-icon">🔒</div>
+      <h2>Privacy Requests</h2>
+      <p>CCPA opt-out, data deletion, or questions about how your information is handled.</p>
+      <a href="mailto:contact.shouldimoveapp@gmail.com?subject=Privacy%20Request" class="contact-link">Submit a request</a>
+    </div>
+
+  </div>
+
+  <div class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <p class="faq-q">Where does the salary and cost-of-living data come from?</p>
+      <p class="faq-a">Salary estimates are based on Bureau of Labor Statistics (BLS) Occupational Employment and Wage Statistics (OEWS) data, adjusted for local cost of living. Cost-of-living indices are derived from publicly available sources. All figures are estimates intended for general planning — they are not a substitute for employer-specific research.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">How often is the data updated?</p>
+      <p class="faq-a">We aim to update salary data annually when the BLS releases new OEWS figures, typically each spring. Cost-of-living data is refreshed on a similar schedule.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">Can I request that a city or profession be added?</p>
+      <p class="faq-a">Yes — email us with your suggestion and we'll consider it for the next update. Cities and professions with the highest relocation search volume are prioritized.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">What is ShouldIMoveApp Pro?</p>
+      <p class="faq-a">Pro is a paid subscription that unlocks advanced comparison features, detailed breakdowns, and multi-city analysis. See the <a href="/">main app</a> for current pricing and features.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">How do I cancel my Pro subscription?</p>
+      <p class="faq-a">Email us at <a href="mailto:contact.shouldimoveapp@gmail.com?subject=Cancel%20Subscription">contact.shouldimoveapp@gmail.com</a> with the subject line "Cancel Subscription" and we'll process your cancellation promptly.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">How do I opt out of data collection or request deletion of my data?</p>
+      <p class="faq-a">See our <a href="/privacy.html">Privacy Policy</a> for full details. To submit a request, email us at <a href="mailto:contact.shouldimoveapp@gmail.com?subject=Privacy%20Request">contact.shouldimoveapp@gmail.com</a> with the subject "Privacy Request."</p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p style="margin-bottom: 8px;"><strong>ShouldIMoveApp.com</strong> — Free cost of living comparison for U.S. cities</p>
+  <p style="margin-top: 8px;"><a href="/">Home</a> · <a href="/privacy.html">Privacy</a> · <a href="/contact.html">Contact</a></p>
+</footer>
+
+</body>
+</html>
