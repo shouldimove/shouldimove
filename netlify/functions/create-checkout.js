@@ -1,5 +1,5 @@
 // Netlify Function: create-checkout
-// Called when user clicks "Start Trial" in the Pro modal.
+// Called when user clicks "Go Pro" in the Pro modal.
 // Creates a Stripe Checkout session and returns the URL to redirect to.
 //
 // Required env vars in Netlify dashboard:
@@ -41,7 +41,6 @@ exports.handler = async (event) => {
       'payment_method_types[0]': 'card',
       'line_items[0][price]': PRICE_ID,
       'line_items[0][quantity]': '1',
-      'subscription_data[trial_period_days]': '7',
       success_url: 'https://shouldimoveapp.com/activate.html?session_id={CHECKOUT_SESSION_ID}',
       cancel_url: 'https://shouldimoveapp.com/',
       // Collect email during checkout so we can verify subscriptions later
