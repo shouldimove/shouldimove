@@ -4,9 +4,9 @@
 [functions]
   node_bundler = "esbuild"
 
-# Redirect www to apex
+# Redirect non-www to www (canonical is www.shouldimoveapp.com)
 [[redirects]]
-  from = "https://www.shouldimoveapp.com/*"
-  to   = "https://shouldimoveapp.com/:splat"
+  from   = "https://shouldimoveapp.com/*"
+  to     = "https://www.shouldimoveapp.com/:splat"
   status = 301
   force  = true
