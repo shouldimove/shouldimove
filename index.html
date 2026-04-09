@@ -3856,6 +3856,7 @@ function isPro() {
 }
 
 function activatePro(token) {
+  gtag('event', 'pro_activated');
   localStorage.setItem(TOKEN_KEY, token);
   refreshProUI();
 }
@@ -3890,6 +3891,7 @@ function refreshProUI() {
 }
 
 async function startCheckout() {
+  gtag('event', 'checkout_started');
   const btn = document.getElementById('proCheckoutBtn');
   const original = btn.innerHTML;
   btn.textContent = 'Redirecting to checkout…';
@@ -3908,6 +3910,7 @@ async function startCheckout() {
 }
 
 async function restoreAccess() {
+  gtag('event', 'restore_access_attempt');
   const email = prompt('Enter the email address you used when subscribing:');
   if (!email || !email.includes('@')) {
     if (email !== null) alert('Please enter a valid email address.');
@@ -3956,7 +3959,7 @@ async function restoreAccess() {
 // PRO MODAL
 // ─────────────────────────────────────────────
 
-function openProModal()  { document.getElementById('proModal').classList.add('open'); }
+function openProModal()  { document.getElementById('proModal').classList.add('open'); gtag('event', 'pro_modal_open'); }
 function closeProModal() { document.getElementById('proModal').classList.remove('open'); }
 function closeModalIfOutside(e) {
   if (e.target === document.getElementById('proModal')) closeProModal();
