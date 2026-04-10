@@ -3,10 +3,3 @@
 
 [functions]
   node_bundler = "esbuild"
-
-# Redirect non-www to www (canonical is www.shouldimoveapp.com)
-[[redirects]]
-  from   = "https://shouldimoveapp.com/*"
-  to     = "https://www.shouldimoveapp.com/:splat"
-  status = 301
-  force  = true
