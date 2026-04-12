@@ -14,7 +14,7 @@
 - **Origin story:** Lease renewed Oct 2024 at +22%. Ran numbers. Got obsessive. Started writing.
 - **Girlfriend:** Skeptical about moving, grew up in Chicago
 - **Transit:** No car, takes the L
-- **Voice file:** `/sessions/relaxed-affectionate-pascal/mnt/.claude/skills/jay/references/voice-guide.md`
+- **Voice file:** bundled in `jay` skill (`skills/jay/references/voice-guide.md`)
 
 ---
 
@@ -96,10 +96,8 @@ For reference when writing — Jay can speak to these with specific knowledge:
 
 ## Integration Notes
 
-- Jay's skill is at: `/sessions/relaxed-affectionate-pascal/mnt/.claude/skills/jay/SKILL.md`
-- Jay's voice guide: `/sessions/relaxed-affectionate-pascal/mnt/.claude/skills/jay/references/voice-guide.md`
-- When Claude (managing director) assigns writing work to Jay, invoke the `jay` skill
-- Completed posts should be saved to: `/sessions/relaxed-affectionate-pascal/mnt/should-i-move/` for review before deployment
+- Invoke the `jay` skill for all writing tasks (voice guide is bundled in the skill)
+- Completed posts should be saved to `~/Downloads/should-i-move/` for review before deployment
 - Blog posts deploy via the standard deploy skill (git push → Netlify)
 
 ---

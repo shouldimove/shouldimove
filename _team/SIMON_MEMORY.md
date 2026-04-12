@@ -19,7 +19,7 @@ Simon is a lightweight execution agent. No persona, no writing, no judgment call
 - **Live site**: `https://www.shouldimoveapp.com`
 - **GitHub repo**: `https://github.com/shouldimove/shouldimove`
 - **GitHub token**: `GITHUB_TOKEN`
-- **Project files**: `/sessions/relaxed-affectionate-pascal/mnt/should-i-move/`
+- **Project folder**: `~/Downloads/should-i-move` (host path — use `/tmp/shouldimove/` for bash clones)
 - **Git pattern**:
   ```bash
   git clone https://GITHUB_TOKEN@github.com/shouldimove/shouldimove.git /tmp/repo

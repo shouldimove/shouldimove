@@ -89,7 +89,7 @@ These figures are already in the system. Use them in research outputs rather tha
 3. Note sources inline
 4. Flag anything stale (data older than 12 months)
 5. Log to Completed Research Log above
-6. If data will be used for a landing page, also save to `/sessions/relaxed-affectionate-pascal/mnt/should-i-move/research/[city].md`
+6. If data will be used for a landing page, also save to `~/Downloads/should-i-move/research/[city].md`
 
 ---
 
