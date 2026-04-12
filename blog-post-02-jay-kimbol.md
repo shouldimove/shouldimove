@@ -1,0 +1,53 @@
+# I Went to Austin for a Long Weekend. Here's What I Actually Found.
+
+*by Jay Kimbol — July 2025*
+
+---
+
+So I went.
+
+I booked a long weekend in Austin — Thursday through Monday — mostly because I've been looking at the numbers for two months and it felt dishonest to keep researching a city I'd never been to. My lease is up in September. I needed to stop theorizing and go look at the thing.
+
+Quick context if you missed the last post: I'm a remote IT support worker in Chicago making $71k a year, my landlord raised my rent to $2,390 a month, and I've been using shouldimoveapp.com to look at what my salary would actually buy me somewhere cheaper. Austin came up a lot. Cost of living index of 121 versus Chicago's 118 — so basically the same — but Texas has zero state income tax and Illinois takes about 5.2% of my income. On $71k that's roughly $3,700 a year I'd keep just by crossing state lines. Not life-changing but real money.
+
+I landed at Austin-Bergstrom on a Thursday afternoon in early July. It was 97 degrees when I walked out of the terminal. I want to note that I knew this going in. I'd read probably forty different posts about Austin summers and I thought I understood. I did not understand. There's 97 degrees in Chicago, which is miserable, and then there's 97 degrees in Austin at 4pm with the sun at a specific angle and the air sitting on you in a particular way. I stood on the sidewalk outside baggage claim for about four minutes and developed new opinions.
+
+I stayed in South Congress, which felt like the correct choice for a scouting trip — walkable, busy, a genuine neighborhood feel instead of just hotels. My Airbnb was $147 a night. In Chicago that would get you something fine; in Austin it got me a guesthouse behind someone's house that was clean and had a nice little patio. Fine.
+
+The first night I ate at a BBQ place that had maybe a 45-minute wait. I'd been warned about this. The brisket was as good as the internet told me it would be. I also paid $22 for two beers at a bar on South Congress, which is not the Texas-is-cheap experience I'd been mentally projecting.
+
+Friday I did the thing I was actually there to do, which was look at apartments.
+
+I'd been looking at listings online for weeks — the numbers showed 1BRs in the $1,650-$1,800 range in decent neighborhoods — and I wanted to see if the reality matched. More or less, it did. I looked at three places: one in South Austin near Oltorf ($1,720/month, fine, a little dark), one in the Mueller neighborhood that was newer and nicer ($1,840, but included parking), and one in East Austin near Airport Blvd ($1,595 but I had to bring my own washer/dryer, which felt like a gotcha). 
+
+All of them were genuinely cheaper than my Chicago apartment and all of them were bigger. That part of the math held up. My Logan Square one-bedroom is 680 square feet. The Mueller place was 850 square feet with an actual closet situation.
+
+What the numbers didn't capture: I drove to all three apartments. Austin traffic on a Friday afternoon is not a rumor — it is a real physical experience. I was in a rental car for 40 minutes to travel maybe six miles. The city is not built for the number of people who live there, and the people who live there are in cars, and everyone seems vaguely resigned to this.
+
+I asked one of the property managers — a woman named Dara who'd moved from Austin's north side to manage this building in Mueller — what she thought of Austin now versus five years ago. She said traffic was the main thing, and also that the "cheap Texas" era was over, which she said with a kind of dry delivery that suggested she'd said it many times. She'd lived in the Mueller apartment for two years before going back to her own house. She liked Mueller. She said the neighborhood had good walkability by Austin standards, which she clarified meant "you can walk to the grocery store and two coffee shops."
+
+I walked to the grocery store that evening. That part was true.
+
+Saturday I drove out to Barton Springs, which is a naturally-fed swimming pool in the middle of the city that holds a constant temperature of around 68 degrees. It was 99 degrees outside. I would like to state for the record that Barton Springs is legitimately good. You swim in cold spring water under the sky and there are big live oak trees and it costs $9 and I can see why people who live near it consider it a character-defining feature of Austin. If I lived in Mueller, Barton Springs is about 15 minutes by car. I'd probably go twice a week from June through September out of pure self-preservation.
+
+Sunday I sat at a coffee shop in East Austin and ran the numbers again with my actual on-the-ground information.
+
+The tool had shown me that my $71k in Austin was equivalent to roughly $75,200 in Chicago in terms of real purchasing power — about a 5.9% improvement, almost entirely from the tax savings since the COL indexes are so similar. In practice, looking at what I actually spent over a long weekend versus what I'd typically spend in Chicago over the same period: groceries at the HEB (everyone mentions HEB) are cheaper than Jewel, restaurants are mixed — some cheaper, some similar — and bars in the tourist corridor are just expensive everywhere.
+
+The apartment math still works. I'd save at minimum $600/month on rent, which is $7,200/year, plus the ~$3,700 tax savings. That's about $10,900 a year on paper, or roughly $900 a month. That's real. That's a car payment and a vacation and actually having a savings account for the first time since 2022.
+
+But here's where I got quiet on Sunday afternoon, sitting at that coffee shop with a second iced coffee I probably didn't need.
+
+I've been in Chicago six years. My friends are there. Not "people I'm friendly with" — actual friends, the ones who have seen me in some bad years and are still around. Three of them could walk to my apartment right now if I texted. I don't know a single person in Austin except Dara from the Mueller property.
+
+I also don't know what my life looks like when I'm not in a city for a long weekend, when it's not novel, when I'm just in a car on MoPac at 6pm with nowhere interesting to be. Chicago in February is objectively bad. But Chicago in October is one of the best things I've ever experienced, and I don't know what I'd trade it for yet.
+
+The math says Austin makes sense. The math is right. About $900 a month better off is not an abstraction — that's money that currently doesn't exist in my budget showing up out of nowhere. The housing is bigger and cheaper. The winters are not a factor. Barton Springs is real.
+
+I just don't know if I'm actually going to do it.
+
+I have two months to figure that out. The lease renewal form is on my kitchen table. I haven't signed it.
+
+---
+
+*Jay Kimbol is an IT support worker in Chicago who is apparently doing extended research for a move he may or may not make. He's been using shouldimoveapp.com to run the numbers and his own life to test whether the numbers mean anything.*
