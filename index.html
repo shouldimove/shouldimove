@@ -136,6 +136,21 @@
       transition: background 0.2s;
     }
     .header-cta:hover { background: var(--blue2); }
+    .header-intl {
+      background: transparent;
+      color: var(--cyan);
+      border: 1px solid var(--cyan);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+      margin-right: 10px;
+    }
+    .header-intl:hover { background: var(--cyan); color: var(--navy); }
 
     /* ── HERO ── */
     .hero {
@@ -1675,7 +1690,10 @@
 <!-- HEADER -->
 <header>
   <div class="logo">SHOULD I <span>MOVE</span>?</div>
-  <button class="header-cta" id="headerProBtn" onclick="openProModal()">Go Pro — <span style="text-decoration:line-through;opacity:0.6;">$5.99</span> $3.99/mo</button>
+  <div style="display:flex;align-items:center;">
+    <a class="header-intl" href="https://shouldimoveinternational.lovable.app" target="_blank" rel="noopener">🌍 International</a>
+    <button class="header-cta" id="headerProBtn" onclick="openProModal()">Go Pro — <span style="text-decoration:line-through;opacity:0.6;">$5.99</span> $3.99/mo</button>
+  </div>
 </header>
 
 <!-- HERO -->
