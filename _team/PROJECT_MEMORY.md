@@ -16,17 +16,31 @@ Analytics: Google Analytics G-D6WSGPKKDX
 ## File Structure
 
 ```
-/should-i-move/
-  index.html          ← entire app (HTML + CSS + JS, single file)
-  widget.html         ← embeddable employer widget (self-contained, ~684 lines)
-  privacy.html        ← privacy policy
-  contact.html        ← contact page
-  sitemap.xml         ← 3 URLs (homepage 1.0, contact 0.4, privacy 0.3)
-  blog-post-01-jay-kimbol.md / .txt  ← first blog post
-  PROJECT_MEMORY.md   ← this file
+/shouldimove/ (GitHub repo root — served by Netlify)
+  index.html                          ← entire app (HTML + CSS + JS, single file)
+  widget.html                         ← embeddable employer widget (self-contained)
+  privacy.html                        ← privacy policy
+  contact.html                        ← contact page
+  activate.html                       ← Pro activation page
+  100k-salary-new-york-city.html      ← salary-focused landing page
+  sitemap.xml                         ← 37 URLs (as of Apr 19 2026)
+  sitemap.html                        ← HTML-rendered sitemap
+  robots.txt                          ← explicit allows for AI/LLM crawlers + wildcard
+  llms.txt                            ← llmstxt.org-format guide for LLMs
+  ads.txt                             ← AdSense ownership declaration
+  _redirects                          ← Netlify redirects
+  netlify.toml                        ← Netlify build config
+  og-image.png, product-image.png     ← social images
+  cities/                             ← city-pair comparison pages (15 files) + index.html
+  move-from-*.html                    ← legacy city-pair pages at root (14 files)
+  _team/                              ← memory + persona files (Netlify ignores underscore-prefixed folders)
+    PROJECT_MEMORY.md, JESSE_MEMORY.md, JAY_MEMORY.md, SCOUT_MEMORY.md, SIMON_MEMORY.md
+    blog-post-01-jay-kimbol.md
+    jay.skill, scout.skill
+  netlify/functions/                  ← (reserved)
 ```
 
-**Important:** index.html is ~3,831 lines and entirely self-contained. No build step, no npm, no framework. All data (196 cities, 109 jobs) is embedded as JS arrays. This is intentional — it keeps deployment trivially simple (just FTP the files).
+**Important:** index.html is ~3,950 lines and entirely self-contained. No build step, no npm, no framework. All data (196 cities, 109 jobs) is embedded as JS arrays. This is intentional — it keeps deployment trivially simple (just git push, Netlify deploys).
 
 ---
 
@@ -92,19 +106,27 @@ Price: $3.99/month (early adopter). Stripe not yet wired up.
 
 ---
 
-## SEO Status (updated April 6, 2026)
+## SEO + AEO Status (updated April 19, 2026)
 
 - Google Search Console connected ✅, sitemap submitted ✅, homepage indexing requested ✅
 - Search Console linked to GA4 ✅
-- robots.txt live ✅ (`/robots.txt` — allows all, references sitemap)
-- Sitemap at `shouldimoveapp.com/sitemap.xml` ✅ — includes homepage, widget, contact, privacy with www URLs
-- JSON-LD: WebApplication schema ✅ + FAQPage schema ✅ (4 questions)
+- `/robots.txt` ✅ — wildcard allow + explicit `Allow: /` directives for GPTBot, ChatGPT-User, OAI-SearchBot, ClaudeBot, Claude-Web, anthropic-ai, PerplexityBot, Perplexity-User, Google-Extended, Googlebot, Bingbot, Applebot-Extended, CCBot, Bytespider, cohere-ai, Diffbot, FacebookBot, Meta-ExternalAgent, Amazonbot, DuckDuckBot. Sitemap reference points to non-www to match index canonical.
+- `/sitemap.xml` ✅ — **37 URLs** (as of Apr 19 2026): homepage, widget, contact, privacy, sitemap.html, 100k-salary-new-york-city, 15 `/cities/*.html` pair pages + `/cities/`, 14 `/move-from-*.html` legacy pair pages. All non-www.
+- `/llms.txt` ✅ — llmstxt.org format. Lists all primary pages, city-pair pages, salary pages + key data facts + questions the site answers. Created April 19, 2026.
+- JSON-LD on homepage ✅: `WebApplication` + `FAQPage` (9 questions, added Apr 19 2026 mirroring the Common Questions section). Both validated as parseable JSON.
+- JSON-LD on `move-from-*.html` and `cities/*.html`: `Article` schema on each (per-page basic markup). Does NOT yet include `FAQPage`, `Place`, or `BreadcrumbList`.
+- Hero TL;DR paragraph ✅ — added Apr 19 2026 under the H1 with concrete specs (196 cities, 109 jobs, tax range 0% to 10.4% NYC). Styled via new `.hero-tldr` CSS class.
 - IndexNow key file live at `/shouldimoveapp-indexnow-2026.txt` ✅ (Bing will pick up on next crawl)
-- Canonical and og:url both use `https://www.shouldimoveapp.com/` (with www) ✅
-- Title: "Should I Move? Compare Cost of Living Between Cities | Tax-Adjusted Purchasing Power" ✅
-- Meta description: "Compare the real cost of living between any two US cities with tax-adjusted purchasing power. See which cities stretch your salary furthest. Free tool covering 196 cities." ✅
-- City landing pages: none yet — 15 pages scheduled to deploy Apr 10–12
+- Title: "Should I Move? | Free Cost of Living & Salary Comparison Tool"
+- Meta description: "Find out if moving to a new city actually pays off. Compare salaries, cost of living, and purchasing power across 100+ U.S. cities — free."
+- **City-pair landing pages**: 29 live (15 in `/cities/`, 14 at root as `move-from-*.html`). **Individual per-city pages** (e.g., `/cities/austin.html`): none yet — next tier AEO opportunity.
 - Competitor on similar name: shouldimove.co (note: .co not .com — our .com is stronger long-term)
+
+### Known inconsistencies (flagged, not yet fixed)
+
+- **www vs non-www canonical split.** Homepage canonical uses non-www (`https://shouldimoveapp.com/`). All 14 `move-from-*.html` and 15 `cities/*.html` pages use www canonicals (`https://www.shouldimoveapp.com/...`). Sitemap.xml uses non-www (matches homepage). robots.txt sitemap reference uses non-www (matches sitemap). **Recommendation:** pick one (probably non-www since homepage already uses it), bulk-edit all 29 city-pair pages, update `_redirects` to enforce, submit updated sitemap to Search Console.
+- **Root `move-from-*.html` vs `cities/*.html` overlap.** Not byte-identical but cover similar queries and both get canonical tags pointing to themselves. Better long-term: consolidate to `/cities/` structure and 301-redirect legacy URLs.
+- **"Section headings" on homepage are styled divs, not h2 tags.** `Find Your Best Move`, `Compare Multiple Cities`, `Employer Embed Widget` are `<div class="X-title">` rather than real `<h2>`. LLMs and search engines miss semantic structure. Fix = swap div→h2, add CSS override to preserve styling, rewrite copy to question-form ("Which cities will stretch my salary the most?", etc.).
 
 ---
 
@@ -177,6 +199,16 @@ These apply to shouldimoveapp.com and to future similar projects:
 
 - [x] Upload all updated files to Namecheap (done April 2026 — index.html + widget.html with taxes, salary overrides, union/non-union jobs)
 - [x] Submit sitemap to Google Search Console, request indexing
+- [x] Ship first wave of city-pair landing pages (29 live: 15 in `/cities/`, 14 at root)
+- [x] AEO Tier 1 (April 19, 2026): FAQPage schema on homepage, `/llms.txt`, explicit AI-bot allow directives in robots.txt, sitemap expanded from 3 to 37 URLs, hero TL;DR paragraph
+- [ ] **AEO Tier 2** — bigger lift items:
+  - Individual per-city landing pages (`/cities/austin.html`, `/cities/seattle.html`, etc.) — biggest remaining AEO opportunity
+  - Convert homepage label-divs to real `<h2>` tags with question-form copy
+  - Add `Organization` schema with `sameAs` (social profiles)
+  - Publish blog post 1 to a real `/blog/` index on site (not email draft)
+- [ ] **Canonical cleanup** — unify www vs non-www across all 29 city-pair pages; update `_redirects`; resubmit sitemap
+- [ ] **URL dedupe** — consolidate `move-from-*.html` vs `cities/*.html` overlap; 301 legacy URLs
+- [ ] Resubmit sitemap to Search Console after Apr 19 sitemap expansion
 - [ ] Wire up Stripe for real Pro gating
 - [ ] Write Jay Kimbol blog post #2 (visits a city)
 - [ ] BLS metro-level salary data pipeline (more accurate local salary estimates)
