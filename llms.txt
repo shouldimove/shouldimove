@@ -1,0 +1,64 @@
+# Should I Move?
+
+> Free cost-of-living and salary comparison tool for U.S. cities. Calculates tax-adjusted purchasing power to help you decide whether a move will actually make you financially better off — after taxes, rent, and daily costs net out.
+
+Should I Move? is a single-page web app covering 196 U.S. cities and 109 job categories. For any pair of cities you pick, it estimates what a specific job pays in each market, applies the state and local income tax rates, and shows the net purchasing-power difference in dollars. The app is free, requires no sign-up, runs client-side, and is built and maintained by Jesse Kimmerling.
+
+## Primary pages
+
+- [Homepage and comparison tool](https://shouldimoveapp.com/): The core app. Pick any two U.S. cities plus a job; see side-by-side salary estimates, cost of living, tax rates, and net purchasing power. Includes a Best Moves Report (ranks all 196 cities for your job), multi-city comparison, and PDF export.
+- [Embed widget](https://shouldimoveapp.com/widget.html): Self-contained embeddable comparison for employer career pages and realtor sites. Destination city locks to the host; visitors enter their origin city.
+- [Contact](https://shouldimoveapp.com/contact.html)
+- [Privacy policy](https://shouldimoveapp.com/privacy.html)
+
+## City-pair comparison pages (cities/ — newer URL structure)
+
+- [Boston to Miami](https://shouldimoveapp.com/cities/boston-to-miami.html)
+- [Chicago to Austin](https://shouldimoveapp.com/cities/chicago-to-austin.html)
+- [Chicago to Denver](https://shouldimoveapp.com/cities/chicago-to-denver.html)
+- [Chicago to Nashville](https://shouldimoveapp.com/cities/chicago-to-nashville.html)
+- [Dallas to Denver](https://shouldimoveapp.com/cities/dallas-to-denver.html)
+- [Los Angeles to Phoenix](https://shouldimoveapp.com/cities/los-angeles-to-phoenix.html)
+- [NYC to Austin](https://shouldimoveapp.com/cities/nyc-to-austin.html)
+- [NYC to Denver](https://shouldimoveapp.com/cities/nyc-to-denver.html)
+- [NYC to Miami](https://shouldimoveapp.com/cities/nyc-to-miami.html)
+- [NYC to Nashville](https://shouldimoveapp.com/cities/nyc-to-nashville.html)
+- [San Francisco to Austin](https://shouldimoveapp.com/cities/san-francisco-to-austin.html)
+- [San Francisco to Denver](https://shouldimoveapp.com/cities/san-francisco-to-denver.html)
+- [San Francisco to Miami](https://shouldimoveapp.com/cities/san-francisco-to-miami.html)
+- [Seattle to Denver](https://shouldimoveapp.com/cities/seattle-to-denver.html)
+- [Seattle to Phoenix](https://shouldimoveapp.com/cities/seattle-to-phoenix.html)
+
+## Salary-focused pages
+
+- [$100k salary in New York City](https://shouldimoveapp.com/100k-salary-new-york-city.html): What a $100k salary actually buys in NYC after taxes, rent, and cost of living.
+
+## Key data facts
+
+- Cities covered: 196 U.S. cities
+- Jobs covered: 109 job categories, with city-specific salary estimates
+- Wage scaling: modeled by job category. Four scaling models — professional (scales aggressively with COL), trades (moderate scaling), government (policy-set, low scaling), service (tracks minimum wage floors).
+- Union/non-union variants: 8 trades split by union density based on BLS data — electrician (IBEW), plumber (UA), pipefitter (UA), ironworker, carpenter (UBC), heavy-equipment operator (IUOE), construction worker, truck driver (Teamsters). Union senior wages run roughly 32 to 59 percent higher than non-union for the same trade.
+- Taxes: state and local income tax rates baked into purchasing-power math. Notable rates include NYC 10.4 percent (NY state plus NYC local), Philadelphia 6.9 percent, Detroit 6.7 percent, Washington DC 8.5 percent, Chicago 5.2 percent. Zero income tax on wages in Washington, Texas, Florida, Nevada, Tennessee, South Dakota, Wyoming, Alaska, and New Hampshire.
+- Cost of living index: U.S. average is set to 100. A city at 140 costs 40 percent more than average; a city at 85 costs 15 percent less.
+- Purchasing power formula: `salary * (1 - city.tax) / city.col`
+
+## Questions the site answers
+
+- How do I know if moving to a new city is worth it financially?
+- What is cost of living and why does it matter?
+- Is Austin still affordable to move to?
+- What are the most affordable big cities in the U.S.?
+- How much more money do I need if I move to a more expensive city?
+- Does it make sense to move for a higher salary if the city is more expensive?
+- What U.S. cities pay electricians the most?
+- Is it cheaper to live in Texas or Florida?
+- How accurate is a cost-of-living comparison tool?
+
+## Contact
+
+General: contact.shouldimoveapp@gmail.com
+
+## About this file
+
+This file follows the proposed `/llms.txt` convention described at https://llmstxt.org/ — a plain-text index pointing language models at the canonical pages and facts on this site.

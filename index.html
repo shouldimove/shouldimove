@@ -53,6 +53,88 @@
   }
   </script>
 
+  <!-- FAQ Page schema (mirrors the Common Questions section) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I know if moving to a new city is worth it financially?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The key number is your purchasing power — how far your paycheck actually goes after paying for housing, food, and transportation. A $90,000 salary in San Francisco can feel tighter than a $65,000 salary in Memphis. Use the comparison tool above to see your exact numbers side by side."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is cost of living and why does it matter?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Cost of living measures how expensive it is to maintain a normal lifestyle in a given city — covering rent, groceries, transportation, utilities, and healthcare. The U.S. average is set at 100. A city with a score of 140 costs 40% more than average. A score of 85 means it's 15% cheaper. It matters because a higher salary doesn't automatically mean a better life if your costs go up just as fast."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Austin, TX still affordable to move to?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Austin has gotten significantly more expensive over the past several years. Its cost of living index is now around 121 — about 21% above the U.S. average — driven largely by rising rents. It's still cheaper than cities like San Francisco or New York, and Texas has no state income tax, which helps. But it's no longer the bargain it once was. Use the tool above to compare Austin against your current city to see if the numbers work for your specific job and salary."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the most affordable big cities in the U.S.?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Some of the most affordable large cities based on cost of living include Memphis TN, Oklahoma City OK, El Paso TX, Wichita KS, Tulsa OK, Louisville KY, and San Antonio TX. These cities have cost of living indexes well below 90, meaning everyday expenses run 10–20% cheaper than the national average. Compare any of them against your current city using the tool above."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much more money do I need if I move to a more expensive city?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on how much more expensive the new city is. For example, if you earn $60,000 in Houston and move to Seattle (which costs about 67% more), you'd need roughly $100,000 just to maintain the same lifestyle. The comparison tool above calculates this exact number for you automatically based on your job, experience level, and the two cities you pick."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it make sense to move for a higher salary if the city is more expensive?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not always. A $20,000 raise sounds great until you realize your rent went up $1,500/month and groceries, gas, and dining out all cost more too. That's $18,000/year in extra expenses right there. The only way to know for sure is to run the actual numbers — which is exactly what this tool does."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What U.S. cities pay electricians the most?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Electricians tend to earn the most in high cost-of-living cities like San Francisco, Seattle, New York, and Washington DC. However, after adjusting for cost of living, mid-size cities like Denver, Dallas, and Nashville often offer strong purchasing power for trades workers. Select 'Electrician' in the job field above and compare cities to find your best move."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it cheaper to live in Texas or Florida?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Both states have no state income tax. Texas cities like San Antonio, El Paso, and Lubbock are among the most affordable in the country. Florida cities vary — Tampa and Orlando are mid-range, while Miami has gotten quite expensive. In general, smaller Texas cities tend to be cheaper than comparable Florida cities, but it depends on where exactly you're comparing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How accurate is this cost of living comparison tool?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The data is based on publicly available cost of living indexes and salary surveys, updated periodically. It's designed to give you a solid ballpark comparison — accurate enough to make a real decision. For the most precise picture, use the 'Enter your actual salary & rent' override to plug in your real numbers. Always verify specific costs like rent with current listings in your target city before making a final decision."
+        }
+      }
+    ]
+  }
+  </script>
+
   <!-- Favicon (inline SVG — no extra files needed) -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23060e22'/><text y='44' x='8' font-size='40' font-family='sans-serif' font-weight='900' fill='%231a8cff'>?</text></svg>" />
   <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23060e22'/><text y='44' x='8' font-size='40' font-family='sans-serif' font-weight='900' fill='%231a8cff'>?</text></svg>" />
@@ -186,6 +268,13 @@
       font-size: 1.05rem;
       max-width: 540px;
       margin: 0 auto;
+    }
+    .hero .hero-tldr {
+      font-size: 0.95rem;
+      max-width: 620px;
+      margin-top: 18px;
+      line-height: 1.55;
+      opacity: 0.92;
     }
 
     /* ── AD BANNER ── */
@@ -1701,6 +1790,7 @@
   <div class="hero-eyebrow">Free City Comparison Tool</div>
   <h1>Does Moving <span class="accent">Actually</span><br>Pay Off?</h1>
   <p>See how far your paycheck really goes in any U.S. city — and exactly what salary you'd need to break even after moving.</p>
+  <p class="hero-tldr">Should I Move? compares 196 U.S. cities across 109 job categories. For any pair of cities you pick, it estimates what your job pays in each market, applies the state and local income tax rate (zero in Texas, Florida, Washington and six other states; up to 10.4% in New York City), and shows your real purchasing-power difference in dollars. No sign-up, runs in your browser, free.</p>
 </section>
 
 <!-- TOP AD -->
