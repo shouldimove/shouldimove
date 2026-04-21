@@ -1708,6 +1708,86 @@
       .verdict-banner { flex-direction: column; }
       .modal { padding: 28px 20px; }
     }
+    /* ── POPULAR COMPARISONS ── */
+    .popular-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+    }
+    .popular-inner {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+    }
+    .popular-eyebrow {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 10px;
+    }
+    .popular-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .popular-lede {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .popular-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px 40px;
+      margin-bottom: 24px;
+    }
+    .popular-group h3 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .popular-group ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .popular-group li {
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .popular-group li:last-child { border-bottom: none; }
+    .popular-group a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .popular-group a:hover { color: var(--cyan); }
+    .popular-seeall {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 0.95rem;
+    }
+    .popular-seeall a {
+      color: var(--cyan);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .popular-seeall a:hover { text-decoration: underline; }
+    @media (max-width: 720px) {
+      .popular-inner { padding: 24px 20px; }
+      .popular-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
     /* ── FAQ ── */
     .faq-section {
       max-width: 900px;
@@ -2197,6 +2277,53 @@
       </div>
 
     </div>
+  </div>
+</section>
+
+<!-- POPULAR CITY COMPARISONS -->
+<section class="popular-section">
+  <div class="popular-inner">
+    <div class="popular-eyebrow">Real Comparisons</div>
+    <h2 class="popular-title">Popular City Move Comparisons</h2>
+    <p class="popular-lede">Already know the two cities you're weighing? Jump to a full tax-adjusted breakdown — each page walks through cost of living, state income tax, and real purchasing power.</p>
+    <div class="popular-grid">
+      <div class="popular-group">
+        <h3>From New York City</h3>
+        <ul>
+          <li><a href="/cities/nyc-to-austin.html">Should I Move from NYC to Austin?</a></li>
+          <li><a href="/cities/nyc-to-denver.html">Should I Move from NYC to Denver?</a></li>
+          <li><a href="/cities/nyc-to-miami.html">Should I Move from NYC to Miami?</a></li>
+          <li><a href="/cities/nyc-to-nashville.html">Should I Move from NYC to Nashville?</a></li>
+        </ul>
+      </div>
+      <div class="popular-group">
+        <h3>From Chicago</h3>
+        <ul>
+          <li><a href="/cities/chicago-to-austin.html">Should I Move from Chicago to Austin?</a></li>
+          <li><a href="/cities/chicago-to-denver.html">Should I Move from Chicago to Denver?</a></li>
+          <li><a href="/cities/chicago-to-nashville.html">Should I Move from Chicago to Nashville?</a></li>
+        </ul>
+      </div>
+      <div class="popular-group">
+        <h3>From San Francisco</h3>
+        <ul>
+          <li><a href="/cities/san-francisco-to-austin.html">Should I Move from San Francisco to Austin?</a></li>
+          <li><a href="/cities/san-francisco-to-denver.html">Should I Move from San Francisco to Denver?</a></li>
+          <li><a href="/cities/san-francisco-to-miami.html">Should I Move from San Francisco to Miami?</a></li>
+        </ul>
+      </div>
+      <div class="popular-group">
+        <h3>From Other Cities</h3>
+        <ul>
+          <li><a href="/cities/boston-to-miami.html">Should I Move from Boston to Miami?</a></li>
+          <li><a href="/cities/dallas-to-denver.html">Should I Move from Dallas to Denver?</a></li>
+          <li><a href="/cities/los-angeles-to-phoenix.html">Should I Move from Los Angeles to Phoenix?</a></li>
+          <li><a href="/cities/seattle-to-denver.html">Should I Move from Seattle to Denver?</a></li>
+          <li><a href="/cities/seattle-to-phoenix.html">Should I Move from Seattle to Phoenix?</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="popular-seeall"><a href="/cities/">See all city-to-city comparisons →</a></p>
   </div>
 </section>
 
