@@ -2819,13 +2819,14 @@ function populateDropdowns() {
     to.add(opt2);
   });
 
-  jobs.forEach((j, i) => {
-    job.add(new Option(j.name, i));
-  });
+  // "Other — Enter My Income" first, then alphabetical jobs list
+  jobs.forEach((j, i) => { if (j.entry === null) job.add(new Option(j.name, i)); });
+  jobs.forEach((j, i) => { if (j.entry !== null) job.add(new Option(j.name, i)); });
 
-  // Defaults: Houston → Dallas
+  // Defaults: Houston → Dallas, and default job to the first real entry (not "Other")
   from.value = cities.findIndex(c => c.name === 'Houston');
   to.value   = cities.findIndex(c => c.name === 'Dallas');
+  job.value  = jobs.findIndex(j => j.entry !== null);
 
   // Toggle experience pills for "Other — Enter My Income" jobs
   job.addEventListener('change', () => {
