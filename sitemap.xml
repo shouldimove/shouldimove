@@ -264,4 +264,17 @@
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://shouldimoveapp.com/blog/cities-that-surprise-you.html</loc>
+    <lastmod>2026-05-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://shouldimoveapp.com/blog/sixty-k-math.html</loc>
+    <lastmod>2026-05-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
 </urlset>
