@@ -1,5 +1,5 @@
 # Jesse — Claude Memory File
-*Last updated: April 5, 2026 (evening)*
+*Last updated: May 7, 2026 (AdSense content sprint batch 1)*
 *Auto-loaded via CLAUDE.md — Claude reads this automatically at session start.*
 
 ---
@@ -266,7 +266,52 @@ Note: `git config` lines are required in fresh sessions or the commit will fail 
 
 ## Session Log (most recent first)
 
-### April 10, 2026 (next session — pick up here)
+### May 7, 2026 — AdSense diagnosis + Content sprint batch 1
+- **AdSense finding:** Site has NOT actually been approved. AdSense dashboard shows "Your site isn't ready to show ads" with **"Low value content"** policy violation. The earlier sense that AdSense had approved was wrong — site is still in "Needs attention" state. This is the real reason ads aren't showing.
+- Secondary issue: site has zero `<ins class="adsbygoogle">` ad units on any page (only the loader script). Even after approval, would need either Auto Ads enabled or manual unit placement.
+- **Action plan:** content sprint to clear Low Value Content rejection across multiple sessions before requesting re-review.
+- **Batch 1 completed and deployed (May 7):**
+  - Discovered Jay's existing posts (01 + 02) were sitting as `.md` files in repo, NOT actually published to the live site. Rendered both as HTML.
+  - Published 3 long-form Jay Kimbol blog posts to `/blog/`:
+    - `/blog/my-landlord-sent-me-a-number.html` (post 01, ~1,000 words)
+    - `/blog/austin-long-weekend.html` (post 02, ~1,300 words)
+    - `/blog/the-no-income-tax-thing.html` (NEW post 03, ~1,500 words on TX/FL/TN/WA/NV tax tradeoffs)
+  - Built `/blog/` index page listing all posts with excerpts
+  - Built `/about.html` — site backstory + how the calculations work + who's behind it
+  - Injected 580-650 words of unique Jay-voice editorial into 3 thin city pages: NYC→Austin, Chicago→Denver, SF→Austin
+  - Updated sitemap.xml (now 42 URLs, +5) and sitemap.html (+blog section, +about)
+  - Added Blog/About links to index.html footer
+  - Pushed to GitHub `main` (commit `60f6c0a`); Netlify auto-deployed; verified all new URLs return 200.
+- **GA4 traffic snapshot (last 7 days, Apr 30 – May 6):** 7 active users, 7 new users, 28 events, 0 key events, down 41.7% WoW. Tiny.
+- **GA4 cleanup TODO:** there's a duplicate empty GA4 property in the account named `shouldimoveapp.com` (ID `G-CWSK3D12ZZ`) with zero data. The live site is tagged with the `ShouldIMoveApp` property (`G-D6WSGPKKDX`). Delete the empty duplicate next admin session.
+- **Do NOT request AdSense re-review yet.** Want at least 2 more content batches first so the site is unambiguously substantial.
+
+### May 7, 2026 — Content sprint batch 2 (same day as batch 1)
+- **Batch 2 deployed (commit `f1b005d`):**
+  - `/blog/cities-that-surprise-you.html` — Jay post #4, ~1,600 words on Cincinnati, Pittsburgh, Indianapolis, Memphis
+  - `/blog/sixty-k-math.html` — Jay post #5, ~1,450 words with line-by-line budget tables for $60k take-home in Chicago/Memphis/Indianapolis/Cincinnati
+  - Editorial sections (~600-660 words each) injected into 3 more thin city pages: NYC→Miami, Chicago→Austin, Boston→Miami
+  - Wired endnotes so series reads in order (post 03 → 04 → 05)
+  - Sitemap.xml now 44 URLs; sitemap.html updated; blog index updated
+- **Cumulative new long-form content across batches 1+2: ~8,700 words.** 5 published Jay blog posts, About page, 6 city pages with unique editorial.
+- **Still NOT requesting AdSense re-review.** Want batch 3 first.
+
+### May 7, 2026 — Content sprint batch 3 (trimmed; same day)
+- **Batch 3 deployed (commit `ea95b62`):**
+  - `/blog/lease-is-up-heres-what-im-doing.html` — Jay post #7, ~1,930 words. The series climax: Jay negotiates remote work and trials Indianapolis for 3 months instead of either fully moving to Austin or staying put. Honest hedged ending.
+  - **Skipped** Jay post #6 ("if I were 24 and starting over") to conserve tokens — can write later if needed.
+  - **Skipped** the additional city editorials this batch — diminishing returns on Low Value Content fix.
+- **Final cumulative content: ~10,600 words across 6 Jay blog posts + About page + 6 enriched city pages.**
+
+### NEXT ACTION: Submit AdSense re-review
+- Go to AdSense → Sites → shouldimoveapp.com (status currently "Needs attention")
+- Tick "I confirm I have fixed the issues"
+- Click "Request review"
+- Re-review usually takes a few days to a couple weeks. Watch the Sites card status flip from "Needs attention" to "Ready" or send another rejection email.
+- If approved: enable Auto Ads in AdSense → Ads → By site → shouldimoveapp.com → Edit → toggle Auto Ads ON. That alone will start serving ads (the loader script is already on every page; no code changes needed).
+- If rejected again: read the new violation reason carefully — would suggest writing post #6 + adding 3-4 more city editorials before resubmitting.
+
+### April 10, 2026 (older planning notes — pre-empted by AdSense diagnosis)
 **NEXT UP — SEO page build queue (do in order, batch per session to stay under Netlify/token limits):**
 1. "$100k salary in [city]" — 10 pages: NYC, SF, LA, Chicago, Miami, Austin, Denver, Seattle, Boston, Houston
 2. "What salary do you need in [city]" — 10 pages: Nashville, Austin, Phoenix, Denver, Raleigh, Charlotte, Tampa, Jacksonville, Fort Worth, San Antonio

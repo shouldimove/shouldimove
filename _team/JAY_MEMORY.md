@@ -22,7 +22,18 @@
 
 | # | Title | Type | URL | Published | Notes |
 |---|-------|------|-----|-----------|-------|
-| 1 | "I Ran My Own City Numbers and Now I Can't Stop" | Blog post | shouldimoveapp.com/blog/jay-kimbol-city-numbers | Apr 5, 2026 | First post. Performs well organically. |
+| 1 | "My Landlord Sent Me a Number and I Haven't Been the Same Since" | Blog post | /blog/my-landlord-sent-me-a-number.html | May 7, 2026 (rendered as HTML; original draft June 2025) | Logan Square lease renewal post. Was sitting as .md in repo; published to live site as part of AdSense content sprint. |
+| 2 | "I Went to Austin for a Long Weekend. Here's What I Actually Found." | Blog post | /blog/austin-long-weekend.html | May 7, 2026 (rendered as HTML; original draft July 2025) | Scouting trip post. Was sitting as .md in repo; published to live site May 7. |
+| 3 | "The No-Income-Tax Thing Is Not What You Think It Is" | Blog post | /blog/the-no-income-tax-thing.html | May 7, 2026 | NEW for AdSense content sprint. ~1,500 words. State-by-state breakdown of TX/FL/TN/WA/NV/SD/AK/NH tax tradeoffs. Counter to the "no income tax = automatic win" narrative. |
+| C1 | NYC→Austin editorial | City page editorial | /move-from-new-york-city-to-austin.html | May 7, 2026 | 616-word Jay-voice section injected. Subway loss, Austin summer reality, real tax math. |
+| C2 | Chicago→Denver editorial | City page editorial | /move-from-chicago-to-denver.html | May 7, 2026 | 582-word Jay-voice section. Counter the "Denver is cheap" assumption. Altitude + housing reality. |
+| C3 | SF→Austin editorial | City page editorial | /move-from-san-francisco-to-austin.html | May 7, 2026 | 644-word Jay-voice section. Salary-keeps-vs-adjusts framing. Bay Area exodus realism. |
+| 4 | "The Cities That Surprise You. (Not Austin, Not Nashville.)" | Blog post | /blog/cities-that-surprise-you.html | May 7, 2026 (batch 2) | ~1,600 words on Cincinnati, Pittsburgh, Indianapolis, Memphis. Honest tradeoffs per city, including Memphis crime asterisk. |
+| 5 | "What $60K Actually Buys You Outside of Chicago" | Blog post | /blog/sixty-k-math.html | May 7, 2026 (batch 2) | ~1,450 words. Line-by-line budget tables comparing $60k take-home and expenses in Chicago, Memphis, Indianapolis, Cincinnati. Closes with the "you need a portable salary" insight. |
+| C4 | NYC→Miami editorial | City page editorial | /move-from-new-york-city-to-miami.html | May 7, 2026 (batch 2) | 611-word section. Florida insurance crisis, condo recertification, summer weather. |
+| C5 | Chicago→Austin editorial | City page editorial | /move-from-chicago-to-austin.html | May 7, 2026 (batch 2) | 611-word section. Honest "this move is roughly a wash" take, AC bill reality, car costs. |
+| C6 | Boston→Miami editorial | City page editorial | /move-from-boston-to-miami.html | May 7, 2026 (batch 2) | 661-word section. Boston tax bite, Miami insurance reality, condo special-assessment risk. |
+| 7 | "My Lease Is Up. Here's What I'm Actually Doing." | Blog post (series climax) | /blog/lease-is-up-heres-what-im-doing.html | May 7, 2026 (batch 3 — trimmed) | ~1,930 words. The narrative payoff: Jay negotiates a remote arrangement and trials Indianapolis for 3 months instead of either committing to Austin or staying put in Chicago. Honest, hedged ending. Skipped post #6 (the "if I were 24" speculative piece) to conserve tokens — can write later if needed. |
 
 ---
 
@@ -32,10 +43,11 @@
 
 | # | Title / Topic | Status | Target Date | Notes |
 |---|---------------|--------|-------------|-------|
-| 2 | Tax-free states — what they don't tell you | **NEXT UP** | Apr 10-12, 2026 (overnight run) | Focus: TX/FL property tax reality, TN sales tax on groceries. Counter the "no income tax" simplification. ~900 words. |
-| 3 | The cities that surprise you (not Austin, not Nashville) | Pending | Apr 11-12 overnight | Cities: Cincinnati, Pittsburgh, Indianapolis, Memphis. Lead with the "nobody says Memphis" angle. |
-| 4 | Can a $60k salary actually work in a LCOL city? | Pending | TBD | Run actual numbers through the tool at multiple salary levels. Show the math transparently. |
-| 5 | What I'd do if I were 24 and starting over | Pending | TBD | More personal/speculative. Could be shorter (~700 words). |
+| ~~2~~ | Tax-free states (now post #3 above: "The No-Income-Tax Thing Is Not What You Think It Is") | ✅ Published May 7, 2026 | — | Done. ~1,500 words. |
+| 4 | The cities that surprise you (not Austin, not Nashville) | **NEXT UP** | Batch 2 | Cities: Cincinnati, Pittsburgh, Indianapolis, Memphis. Lead with the "nobody says Memphis" angle. |
+| 5 | Can a $60k salary actually work in a LCOL city? | Pending | Batch 2 | Run actual numbers through the tool at multiple salary levels. Show the math transparently. |
+| 6 | What I'd do if I were 24 and starting over | Pending | Batch 3 | More personal/speculative. Could be shorter (~700 words). |
+| 7 | What changed when I actually moved (or didn't) | Pending | Batch 3 | Closer-to-conclusion post. The post the series has been building toward. |
 
 ### Quora Answers
 
@@ -102,4 +114,4 @@ For reference when writing — Jay can speak to these with specific knowledge:
 
 ---
 
-*Last updated: Apr 6, 2026*
+*Last updated: May 7, 2026 (AdSense content sprint batch 1)*
